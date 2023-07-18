@@ -12,20 +12,17 @@ class CarouselCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15.0),
-      ),
+      margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: [
           ClipRRect(
             borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(10.0),
-              topRight: Radius.circular(10.0),
+              topLeft: Radius.circular(5.0),
+              topRight: Radius.circular(5.0),
             ),
             child: Image.network(
-              'https://image.tmdb.org/t/p/w500$imageUrl',
+              imageUrl,
               fit: BoxFit.cover,
               height: double.infinity,
               width: double.infinity,

@@ -31,7 +31,7 @@ class TitleCard extends StatelessWidget {
                 alignment: Alignment.bottomCenter,
                 children: [
                   Image.network(
-                    'https://image.tmdb.org/t/p/w500${title.imageUrl}',
+                    title.imageUrl,
                     height: 150,
                     fit: BoxFit.cover,
                   ),
@@ -44,7 +44,7 @@ class TitleCard extends StatelessWidget {
                     ),
                   ),
                   Image.network(
-                    'https://image.tmdb.org/t/p/w500${title.posterUrl}',
+                    title.posterUrl,
                     height: 150,
                     fit: BoxFit.cover,
                   ),

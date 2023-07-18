@@ -69,7 +69,7 @@ class _TitleDetailsPageState extends State<TitleDetailsPage> {
                 ClipPath(
                   clipper: CustomShape(),
                   child: Image.network(
-                    'https://image.tmdb.org/t/p/w500${widget.titleInfos.imageUrl}',
+                    widget.titleInfos.imageUrl,
                     height: 350,
                     fit: BoxFit.cover,
                   ),
@@ -114,7 +114,7 @@ class _TitleDetailsPageState extends State<TitleDetailsPage> {
                   child: Card(
                     elevation: 10.0,
                     child: Image.network(
-                      'https://image.tmdb.org/t/p/w500${widget.titleInfos.posterUrl}',
+                      widget.titleInfos.posterUrl,
                       height: 200.0,
                     ),
                   ),

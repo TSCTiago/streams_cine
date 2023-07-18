@@ -16,7 +16,7 @@ class GenresOption extends StatelessWidget {
       width: 150.0,
       height: 50.0,
       alignment: Alignment.center,
-      margin: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 3.0),
+      margin: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 10.0),
       decoration: BoxDecoration(
           color: text == provider.genreSelected
               ? Colors.grey

@@ -1,3 +1,6 @@
+import '../const/app_consts.dart';
+import '../utils/utils.dart';
+
 class TitlesModel {
   int id;
   String title;
@@ -20,4 +23,21 @@ class TitlesModel {
     required this.genre,
     required this.isSerie,
   });
+
+  factory TitlesModel.fromJson(Map<String, dynamic> json, bool isSeries) {
+    return TitlesModel(
+      id: json['id'],
+      title: json[isSeries ? 'name' : 'title'] ?? 'Não Fornecido',
+      posterUrl: Utils.imageTitle(json['poster_path']),
+      imageUrl: Utils.imageTitle(json['backdrop_path']),
+      rating: json['vote_average'].toString(),
+      date: json[isSeries ? 'first_air_date' : 'release_date'] != null
+          ? Utils.formatDate(json[isSeries ? 'first_air_date' : 'release_date'])
+          : 'Não Fornecido',
+      sinopse: json['overview'] ?? 'Não Fornecido',
+      genre: Utils.genres(
+          json['genre_ids'], isSeries ? kSeriesGenres : kMoviesGenres),
+      isSerie: isSeries,
+    );
+  }
 }

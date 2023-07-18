@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:streams_cine/const/app_consts.dart';
 import 'package:streams_cine/widgets/rating_stars.dart';
 
 import '../utils/utils.dart';
@@ -25,17 +26,16 @@ class SeasonCard extends StatelessWidget {
         .indexWhere((element) => element['season_number'] == index + 1);
 
     if (currentSeason > -1) {
-      url = seasonDetails[currentSeason]['poster_path'] ??
-          '/wwemzKWzjKYJFfCeiB57q3r4Bcm.png';
+      url = Utils.imageTitle(seasonDetails[currentSeason]['poster_path']);
     } else {
-      url = '/wwemzKWzjKYJFfCeiB57q3r4Bcm.png';
+      url = kdefaultImage;
     }
     return Center(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Image.network(
-            'https://image.tmdb.org/t/p/w500$url',
+            url,
             height: 200.0,
             fit: BoxFit.contain,
           ),

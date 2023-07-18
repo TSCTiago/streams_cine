@@ -1,3 +1,5 @@
+import 'dart:math';
+
 Map<String, String>? kHeaders = {
   'accept': 'application/json',
   'Authorization':
@@ -46,3 +48,15 @@ List<Map<String, dynamic>> kSeriesGenres = [
   {"id": 10768, "name": "Guerra & Política"},
   {"id": 37, "name": "Faroeste"}
 ];
+
+const kdefaultImage =
+    'https://cloud.filmfed.com/defaults/movie-poster/s_movie_poster_default.png';
+
+final kFetchMovies =
+    'https://api.themoviedb.org/3/discover/movie?language=pt-BR&page=${Random().nextInt(500) + 1}';
+
+final kFetchNowPlaying =
+    'https://api.themoviedb.org/3/movie/now_playing?language=pt-BR&page=${Random().nextInt(5) + 1}';
+
+final kFetchSeries =
+    'https://api.themoviedb.org/3/discover/tv?language=pt-BR&page=${Random().nextInt(10) + 1}';

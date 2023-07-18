@@ -35,29 +35,26 @@ class _TitlesPageState extends State<TitlesPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SizedBox(
-                height: 40.0,
-                // width: 100,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: widget.genres.length,
-                  itemBuilder: (BuildContext context, int index) =>
-                      GestureDetector(
-                          onTap: () {
-                            provider.changeGenreFilter(
-                                widget.genres[index]['name']);
-                            widget.genres[index]['name'] == 'Todos'
-                                ? filteredlist = widget.list
-                                : filteredlist = widget.list
-                                    .where((element) => element.genre
-                                        .contains(widget.genres[index]['name']))
-                                    .toList();
-                          },
-                          child:
-                              GenresOption(text: widget.genres[index]['name'])),
-                ),
+            SizedBox(
+              height: 60.0,
+              // width: 100,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: widget.genres.length,
+                itemBuilder: (BuildContext context, int index) =>
+                    GestureDetector(
+                        onTap: () {
+                          provider
+                              .changeGenreFilter(widget.genres[index]['name']);
+                          widget.genres[index]['name'] == 'Todos'
+                              ? filteredlist = widget.list
+                              : filteredlist = widget.list
+                                  .where((element) => element.genre
+                                      .contains(widget.genres[index]['name']))
+                                  .toList();
+                        },
+                        child:
+                            GenresOption(text: widget.genres[index]['name'])),
               ),
             ),
             filteredlist.isEmpty

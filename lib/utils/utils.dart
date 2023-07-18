@@ -1,3 +1,5 @@
+import 'package:streams_cine/const/app_consts.dart';
+
 class Utils {
   static String formatDate(String data) {
     String isoDate = data;
@@ -21,5 +23,11 @@ class Utils {
       }
     }
     return genres;
+  }
+
+  static String imageTitle(dynamic path) {
+    return path == null
+        ? kdefaultImage
+        : 'https://image.tmdb.org/t/p/w500$path';
   }
 }

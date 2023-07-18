@@ -29,7 +29,7 @@ class FavoritesPage extends StatelessWidget {
                   alignment: Alignment.bottomCenter,
                   children: [
                     Image.network(
-                      'https://image.tmdb.org/t/p/w500${favorites[index].imageUrl}',
+                      favorites[index].imageUrl,
                       height: 250,
                       width: double.infinity,
                       fit: BoxFit.cover,
@@ -42,7 +42,7 @@ class FavoritesPage extends StatelessWidget {
                     ),
                     Center(
                       child: Image.network(
-                        'https://image.tmdb.org/t/p/w500${favorites[index].posterUrl}',
+                        favorites[index].posterUrl,
                         height: 250,
                         fit: BoxFit.cover,
                       ),
