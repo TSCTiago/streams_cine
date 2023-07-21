@@ -14,7 +14,7 @@ class RatingStars extends StatelessWidget {
       rating: double.parse(rating) / 2,
       itemBuilder: (context, index) => Icon(
         Icons.star,
-        color: Colors.orange.shade900,
+        color: Theme.of(context).primaryColor,
       ),
       itemCount: 5,
       itemSize: 24.0,

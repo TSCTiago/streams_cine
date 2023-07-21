@@ -30,7 +30,9 @@ class _TitlesPageState extends State<TitlesPage> {
     final provider = Provider.of<TitleProvider>(context, listen: true);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Movies'),
+        title: widget.list[0].isSerie
+            ? const Text('Séries')
+            : const Text('Filmes'),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -39,6 +41,7 @@ class _TitlesPageState extends State<TitlesPage> {
               height: 60.0,
               // width: 100,
               child: ListView.builder(
+                shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
                 itemCount: widget.genres.length,
                 itemBuilder: (BuildContext context, int index) =>

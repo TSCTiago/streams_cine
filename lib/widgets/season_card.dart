@@ -54,7 +54,10 @@ class SeasonCard extends StatelessWidget {
                   const Icon(Icons.date_range),
                   const SizedBox(width: 10.0),
                   Text(
-                    Utils.formatDate(seasonDetails[currentSeason]['air_date']),
+                    seasonDetails[currentSeason]['air_date'] != null
+                        ? Utils.formatDate(
+                            seasonDetails[currentSeason]['air_date'])
+                        : "Não Informado",
                     style: const TextStyle(fontSize: 17.0),
                   ),
                 ],

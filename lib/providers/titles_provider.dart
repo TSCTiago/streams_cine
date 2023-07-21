@@ -9,14 +9,16 @@ class TitleProvider with ChangeNotifier {
   final List<TitlesModel> _nowPlaying = [];
   final List<TitlesModel> _series = [];
   final List<TitlesModel> _favorites = [];
+  final List<TitlesModel> _searchedTitles = [];
 
   Map<String, dynamic> seasons = {};
   String genreSelected = 'Todos';
-
+  bool isSearching = true;
   List<TitlesModel> get movies => _movies;
   List<TitlesModel> get nowPlaying => _nowPlaying;
   List<TitlesModel> get series => _series;
   List<TitlesModel> get favorites => _favorites;
+  List<TitlesModel> get searchedTitles => _searchedTitles;
 
   Future<void> fetchMovies() async {
     final url = kFetchMovies;
@@ -41,6 +43,17 @@ class TitleProvider with ChangeNotifier {
     final url =
         'https://api.themoviedb.org/3/tv/$id?append_to_response=images&language=pt-BR';
     await API().getSeasons(id, url, seasons);
+    notifyListeners();
+  }
+
+  Future<void> searchTitle(String query) async {
+    // _searchedTitles.clear();
+    final url =
+        'https://api.themoviedb.org/3/search/multi?query=$query&language=pt-BR';
+    await API()
+        .requestTitle(_searchedTitles, url)
+        .then((value) => isSearching = false);
+    // debugPrint(_searchedTitles.toString());
     notifyListeners();
   }
 

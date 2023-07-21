@@ -3,4 +3,5 @@ class RoutesApp {
   static const details = '/details';
   static const titlesPages = '/titles-page';
   static const favorites = '/favorites';
+  static const search = '/search';
 }

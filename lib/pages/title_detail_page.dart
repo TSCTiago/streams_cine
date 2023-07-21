@@ -174,6 +174,7 @@ class _TitleDetailsPageState extends State<TitleDetailsPage> {
               SizedBox(
                 height: 400.0,
                 child: ListView.builder(
+                  shrinkWrap: true,
                   itemCount: providerTitle.seasons['seasons_number'] ?? 0,
                   itemBuilder: (context, index) => SeasonCard(
                     index: index,

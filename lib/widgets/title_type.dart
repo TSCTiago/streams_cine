@@ -14,14 +14,12 @@ class TitleType extends StatelessWidget {
         horizontal: 10.0,
         vertical: 5.0,
       ),
-      child: Flexible(
-        child: Text(
-          type,
-          textAlign: TextAlign.start,
-          style: const TextStyle(
-            fontSize: 20.0,
-            fontWeight: FontWeight.bold,
-          ),
+      child: Text(
+        type,
+        textAlign: TextAlign.start,
+        style: const TextStyle(
+          fontSize: 20.0,
+          fontWeight: FontWeight.bold,
         ),
       ),
     );

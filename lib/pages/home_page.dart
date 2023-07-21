@@ -5,9 +5,11 @@ import 'package:streams_cine/const/app_consts.dart';
 import '../app/rotes_app.dart';
 import '../providers/titles_provider.dart';
 import '../widgets/carousel.dart';
+import '../widgets/config_modal.dart';
 import '../widgets/list_title_card.dart';
+import '../widgets/text_field.dart';
 import '../widgets/title_type.dart';
-import '../widgets/skeleton_progress.dart';
+import '../widgets/skeleton/skeleton_progress_list_view.dart';
 import '../widgets/titles_page_link.dart';
 
 class HomePage extends StatefulWidget {
@@ -32,7 +34,7 @@ class _HomePageState extends State<HomePage> {
     final provider = Provider.of<TitleProvider>(context, listen: true);
     return Scaffold(
       appBar: AppBar(
-        centerTitle: false,
+        centerTitle: true,
         title: const Text('Streams Cine'),
         // actions: const [TextField()],
       ),
@@ -40,18 +42,7 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // TextField(
-            //     onSubmitted: (value) {
-            //       debugPrint('Submeteu');
-            //     },
-            //     // controller: _searchController,
-            //     style: const TextStyle(color: Colors.white),
-            //     cursorColor: Colors.white,
-            //     decoration: const InputDecoration(
-            //       hintText: 'Search...',
-            //       hintStyle: TextStyle(color: Colors.white54),
-            //       border: InputBorder.none,
-            //     )),
+            const TextFieldTitle(text: ""),
             const TitleType(type: 'Destaques'),
             provider.nowPlaying.isNotEmpty
                 ? Carousel(provider: provider)
@@ -64,14 +55,14 @@ class _HomePageState extends State<HomePage> {
                 genres: kMoviesGenres,
                 titlesList: provider.movies),
             provider.movies.isEmpty
-                ? const SkeletonProgress()
+                ? const SkeletonProgressListView()
                 : ListTitleCard(list: provider.movies),
             TitlesPageLink(
                 titleText: 'Séries',
                 genres: kSeriesGenres,
                 titlesList: provider.series),
             provider.series.isEmpty
-                ? const SkeletonProgress()
+                ? const SkeletonProgressListView()
                 : ListTitleCard(list: provider.series),
           ],
         ),
@@ -91,7 +82,14 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                showModalBottomSheet<void>(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return const ConfigurationModal();
+                  },
+                );
+              },
               icon: const Icon(
                 Icons.settings,
                 size: 30.0,

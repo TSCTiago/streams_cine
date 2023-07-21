@@ -17,6 +17,7 @@ class FavoritesPage extends StatelessWidget {
         title: const Text('Favoritos'),
       ),
       body: ListView.builder(
+        shrinkWrap: true,
         itemCount: favorites.length,
         itemBuilder: (context, index) {
           return Padding(

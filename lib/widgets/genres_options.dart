@@ -20,7 +20,7 @@ class GenresOption extends StatelessWidget {
       decoration: BoxDecoration(
           color: text == provider.genreSelected
               ? Colors.grey
-              : Colors.orange.shade900,
+              : Theme.of(context).primaryColor,
           borderRadius: const BorderRadius.all(Radius.circular(10.0))),
       child: Text(
         text,

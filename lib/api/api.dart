@@ -13,14 +13,16 @@ class API {
     );
 
     if (response.statusCode == 200) {
-      final body = jsonDecode(response.body);
+      final Map<String, dynamic> body = jsonDecode(response.body);
       final List<Map<String, dynamic>> titlesList =
           List<Map<String, dynamic>>.from(body['results']);
 
       for (Map<String, dynamic> title in titlesList) {
         final isSeries = title['name'] != null;
         final titlesModel = TitlesModel.fromJson(title, isSeries);
-        list.add(titlesModel);
+        if (title['media_type'] != 'person') {
+          list.add(titlesModel);
+        }
       }
     }
   }
