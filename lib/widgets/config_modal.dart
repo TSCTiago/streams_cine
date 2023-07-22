@@ -78,25 +78,34 @@ class _ConfigurationModalState extends State<ConfigurationModal> {
                 ),
               ],
             ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 60),
-              child: ElevatedButton(
-                onPressed: () {
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return const ColorPickerDialog();
-                      });
-                },
-                style: ButtonStyle(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'Selecione a paleta',
+                  style: TextStyle(fontSize: 18.0),
+                ),
+                const SizedBox(
+                  width: 15.0,
+                ),
+                CircleAvatar(
+                  radius: 25,
                   backgroundColor:
-                      MaterialStatePropertyAll(Theme.of(context).primaryColor),
+                      Theme.of(context).primaryColor, //<-- SEE HERE
+                  child: IconButton(
+                    icon: const Icon(
+                      Icons.colorize_sharp,
+                      size: 30.0,
+                      // color: Colors.black,
+                    ),
+                    onPressed: () => showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return const ColorPickerDialog();
+                        }),
+                  ),
                 ),
-                child: const Text(
-                  "Select color",
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
+              ],
             ),
             ElevatedButton(
               child: const Text('Fechar'),

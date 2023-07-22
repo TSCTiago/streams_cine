@@ -4,7 +4,7 @@ import 'package:streams_cine/const/app_consts.dart';
 
 import '../app/rotes_app.dart';
 import '../providers/titles_provider.dart';
-import '../widgets/carousel.dart';
+import '../widgets/carousel/carousel.dart';
 import '../widgets/config_modal.dart';
 import '../widgets/list_title_card.dart';
 import '../widgets/text_field.dart';
@@ -29,6 +29,13 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
+  void refreshTitle(TitleProvider provider) async {
+    provider.clearList(provider.movies);
+    provider.clearList(provider.series);
+    await provider.fetchMovies();
+    await provider.fetchSeries();
+  }
+
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<TitleProvider>(context, listen: true);
@@ -36,35 +43,44 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         centerTitle: true,
         title: const Text('Streams Cine'),
-        // actions: const [TextField()],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const TextFieldTitle(text: ""),
-            const TitleType(type: 'Destaques'),
-            provider.nowPlaying.isNotEmpty
-                ? Carousel(provider: provider)
-                : const Text(''),
-            const SizedBox(
-              height: 10.0,
+      body: GestureDetector(
+        onTap: () {
+          // call this method here to hide soft keyboard
+          FocusScope.of(context).requestFocus(FocusNode());
+        },
+        child: RefreshIndicator(
+          color: Theme.of(context).primaryColor,
+          onRefresh: () async => refreshTitle(provider),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const TextFieldTitle(),
+                const TitleType(type: 'Destaques'),
+                provider.nowPlaying.isNotEmpty
+                    ? Carousel(provider: provider)
+                    : const Text(''),
+                const SizedBox(
+                  height: 10.0,
+                ),
+                TitlesPageLink(
+                    titleText: 'Filmes',
+                    genres: kMoviesGenres,
+                    titlesList: provider.movies),
+                provider.movies.isEmpty
+                    ? const SkeletonProgressListView()
+                    : ListTitleCard(list: provider.movies),
+                TitlesPageLink(
+                    titleText: 'Séries',
+                    genres: kSeriesGenres,
+                    titlesList: provider.series),
+                provider.series.isEmpty
+                    ? const SkeletonProgressListView()
+                    : ListTitleCard(list: provider.series),
+              ],
             ),
-            TitlesPageLink(
-                titleText: 'Filmes',
-                genres: kMoviesGenres,
-                titlesList: provider.movies),
-            provider.movies.isEmpty
-                ? const SkeletonProgressListView()
-                : ListTitleCard(list: provider.movies),
-            TitlesPageLink(
-                titleText: 'Séries',
-                genres: kSeriesGenres,
-                titlesList: provider.series),
-            provider.series.isEmpty
-                ? const SkeletonProgressListView()
-                : ListTitleCard(list: provider.series),
-          ],
+          ),
         ),
       ),
       bottomNavigationBar: Container(
@@ -82,26 +98,19 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             IconButton(
-              onPressed: () {
-                showModalBottomSheet<void>(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return const ConfigurationModal();
-                  },
-                );
-              },
+              onPressed: () => showModalBottomSheet<void>(
+                context: context,
+                builder: (BuildContext context) {
+                  return const ConfigurationModal();
+                },
+              ),
               icon: const Icon(
                 Icons.settings,
                 size: 30.0,
               ),
             ),
             IconButton(
-              onPressed: () async {
-                provider.clearList(provider.movies);
-                provider.clearList(provider.series);
-                await provider.fetchMovies();
-                await provider.fetchSeries();
-              },
+              onPressed: () => refreshTitle(provider),
               icon: const Icon(
                 Icons.refresh,
                 size: 30.0,

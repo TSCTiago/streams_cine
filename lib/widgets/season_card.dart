@@ -15,11 +15,10 @@ class SeasonCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(child: _buildCard(season, index));
+    return Card(clipBehavior: Clip.antiAlias, child: _buildCard(season, index));
   }
 
   Widget _buildCard(List<dynamic> seasonDetails, int index) {
-    // debugPrint(seasonDetails.toString());
     late String url;
 
     final currentSeason = seasonDetails
@@ -30,53 +29,55 @@ class SeasonCard extends StatelessWidget {
     } else {
       url = kdefaultImage;
     }
-    return Center(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Image.network(
-            url,
-            height: 200.0,
-            fit: BoxFit.contain,
-          ),
-          const SizedBox(width: 50.0),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 30.0),
-              Text(
-                '${index + 1}ª Temporada',
-                textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 22.0),
-              ),
-              Row(
-                children: [
-                  const Icon(Icons.date_range),
-                  const SizedBox(width: 10.0),
-                  Text(
-                    seasonDetails[currentSeason]['air_date'] != null
-                        ? Utils.formatDate(
-                            seasonDetails[currentSeason]['air_date'])
-                        : "Não Informado",
-                    style: const TextStyle(fontSize: 17.0),
-                  ),
-                ],
-              ),
-              Text(
-                'Episódios: ${seasonDetails[currentSeason]['episode_count']}',
-                style: const TextStyle(fontSize: 17.0),
-              ),
-              Text(
-                'Avaliação: ${seasonDetails[currentSeason]['vote_average']}',
-                style: const TextStyle(fontSize: 17.0),
-              ),
-              RatingStars(
-                rating: seasonDetails[currentSeason]['vote_average'].toString(),
-              ),
-            ],
-          ),
-        ],
-      ),
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Image.network(
+          url,
+          height: 200.0,
+          fit: BoxFit.contain,
+        ),
+        const SizedBox(width: 25.0),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 30.0),
+            Text(
+              '${index + 1}ª TEMPORADA',
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 20.0),
+            ),
+            const Divider(
+                // color: Colors.amber,
+                ),
+            Row(
+              children: [
+                const Icon(Icons.date_range),
+                const SizedBox(width: 10.0),
+                Text(
+                  seasonDetails[currentSeason]['air_date'] != null
+                      ? Utils.formatDate(
+                          seasonDetails[currentSeason]['air_date'])
+                      : "Não Informado",
+                  style: const TextStyle(fontSize: 17.0),
+                ),
+              ],
+            ),
+            Text(
+              'Episódios: ${seasonDetails[currentSeason]['episode_count']}',
+              style: const TextStyle(fontSize: 17.0),
+            ),
+            Text(
+              'Avaliação: ${seasonDetails[currentSeason]['vote_average']}',
+              style: const TextStyle(fontSize: 17.0),
+            ),
+            RatingStars(
+              rating: seasonDetails[currentSeason]['vote_average'].toString(),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

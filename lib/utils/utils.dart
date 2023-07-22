@@ -3,11 +3,9 @@ import 'package:streams_cine/const/app_consts.dart';
 class Utils {
   static String formatDate(String data) {
     String isoDate = data;
-    // debugPrint(isoDate);
-    if (isoDate == "") {
+
+    if (isoDate.isEmpty) {
       return 'Não informado';
-      // isoDate = '2023-01-01';
-      // debugPrint("Deu erro pq veio vazio inteligência");
     }
     DateTime parsedDate = DateTime.parse(isoDate);
 

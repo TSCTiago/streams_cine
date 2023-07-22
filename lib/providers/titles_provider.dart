@@ -53,7 +53,6 @@ class TitleProvider with ChangeNotifier {
     await API()
         .requestTitle(_searchedTitles, url)
         .then((value) => isSearching = false);
-    // debugPrint(_searchedTitles.toString());
     notifyListeners();
   }
 

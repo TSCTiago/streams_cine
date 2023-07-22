@@ -46,7 +46,6 @@ class SearchPage extends StatelessWidget {
           ),
           itemCount: provider.searchedTitles.length,
           itemBuilder: (BuildContext context, int index) {
-            // debugPrint(provider.searchedTitles[index].toString());
             return TitleCard(title: provider.searchedTitles[index]);
           },
         ),

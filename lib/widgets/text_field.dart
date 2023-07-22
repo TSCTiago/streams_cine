@@ -5,10 +5,10 @@ import 'package:streams_cine/app/rotes_app.dart';
 import '../providers/titles_provider.dart';
 
 class TextFieldTitle extends StatefulWidget {
-  final String text;
+  final String? text;
   const TextFieldTitle({
     super.key,
-    required this.text,
+    this.text,
   });
 
   @override
@@ -37,12 +37,11 @@ class _TextFieldTitleState extends State<TextFieldTitle> {
 
   void _submitValue(context) {
     String value = _controller.text;
-    debugPrint(value);
 
     final provider = Provider.of<TitleProvider>(context, listen: false);
     provider.clearList(provider.searchedTitles);
     provider.isSearching = true;
-    provider.searchTitle(value).then((value) => debugPrint('Acabou'));
+    provider.searchTitle(value);
 
     if (!isOnRoute(context, RoutesApp.search)) {
       _controller.text = "";
@@ -59,34 +58,31 @@ class _TextFieldTitleState extends State<TextFieldTitle> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Flexible(
-              child: TextField(
-            decoration: InputDecoration(
-              contentPadding: const EdgeInsets.symmetric(vertical: 1.0),
-              labelText: 'Pesquisar Títulos',
-              focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(
+            child: TextField(
+              decoration: InputDecoration(
+                contentPadding: const EdgeInsets.symmetric(vertical: 1.0),
+                labelText: 'Pesquisar Títulos',
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Theme.of(context).primaryColor,
+                    width: 2.0,
+                  ),
+                ),
+                floatingLabelStyle: TextStyle(
                   color: Theme.of(context).primaryColor,
-                  width: 2.0,
                 ),
               ),
-              floatingLabelStyle: TextStyle(
-                color: Theme.of(context).primaryColor,
-              ),
+              controller: _controller,
+              onSubmitted: (String value) => _submitValue(context),
             ),
-            controller: _controller,
-            onSubmitted: (String value) {
-              _submitValue(context);
-            },
-          )),
+          ),
           Container(
             decoration: BoxDecoration(
               color: Colors.grey.withOpacity(0.2),
               shape: BoxShape.circle,
             ),
             child: IconButton(
-              onPressed: () {
-                _submitValue(context);
-              },
+              onPressed: () => _submitValue(context),
               icon: const Icon(
                 Icons.search,
                 size: 30.0,
