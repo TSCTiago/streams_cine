@@ -21,7 +21,7 @@ class Carousel extends StatelessWidget {
         aspectRatio: 16 / 9,
         viewportFraction: 1.0,
         autoPlay: true,
-        autoPlayInterval: const Duration(seconds: 8),
+        autoPlayInterval: const Duration(seconds: 4),
       ),
       itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) =>
           provider.nowPlaying.isEmpty

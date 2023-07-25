@@ -45,10 +45,7 @@ class _HomePageState extends State<HomePage> {
         title: const Text('Streams Cine'),
       ),
       body: GestureDetector(
-        onTap: () {
-          // call this method here to hide soft keyboard
-          FocusScope.of(context).requestFocus(FocusNode());
-        },
+        onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
         child: RefreshIndicator(
           color: Theme.of(context).primaryColor,
           onRefresh: () async => refreshTitle(provider),

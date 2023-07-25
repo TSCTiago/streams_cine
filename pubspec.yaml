@@ -41,7 +41,13 @@ dependencies:
   carousel_slider: ^4.2.1
   skeletons: ^0.0.3
   flutter_colorpicker: ^1.0.3
-  
+  flutter_native_splash: ^2.3.1
+
+flutter_native_splash:
+  color: "#ef6c00"
+  image: assets/app/app_launcher.gif
+  android: true
+  ios: true  
 
 dev_dependencies:
   flutter_test:

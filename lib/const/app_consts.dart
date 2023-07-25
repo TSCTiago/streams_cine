@@ -52,11 +52,11 @@ List<Map<String, dynamic>> kSeriesGenres = [
 const kdefaultImage =
     'https://cloud.filmfed.com/defaults/movie-poster/s_movie_poster_default.png';
 
-final kFetchMovies =
-    'https://api.themoviedb.org/3/discover/movie?language=pt-BR&page=${Random().nextInt(500) + 1}';
+const kFetchMovies =
+    'https://api.themoviedb.org/3/discover/movie?language=pt-BR&page=';
 
-final kFetchNowPlaying =
-    'https://api.themoviedb.org/3/movie/now_playing?language=pt-BR&page=${Random().nextInt(5) + 1}';
+const kFetchNowPlaying =
+    'https://api.themoviedb.org/3/movie/now_playing?language=pt-BR&page=1';
 
-final kFetchSeries =
-    'https://api.themoviedb.org/3/discover/tv?language=pt-BR&page=${Random().nextInt(10) + 1}';
+const kFetchSeries =
+    'https://api.themoviedb.org/3/discover/tv?language=pt-BR&page=';

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:streams_cine/const/app_consts.dart';
 
@@ -21,20 +23,19 @@ class TitleProvider with ChangeNotifier {
   List<TitlesModel> get searchedTitles => _searchedTitles;
 
   Future<void> fetchMovies() async {
-    final url = kFetchMovies;
-    await API().requestTitle(_movies, url);
+    await API()
+        .requestTitle(_movies, '$kFetchMovies${Random().nextInt(500) + 1}');
     notifyListeners();
   }
 
   Future<void> fetchNowPlaying() async {
-    final url = kFetchNowPlaying;
-    await API().requestTitle(_nowPlaying, url);
+    await API().requestTitle(_nowPlaying, kFetchNowPlaying);
     notifyListeners();
   }
 
   Future<void> fetchSeries() async {
-    final url = kFetchSeries;
-    await API().requestTitle(_series, url);
+    await API()
+        .requestTitle(_series, '$kFetchSeries${Random().nextInt(10) + 1}');
     notifyListeners();
   }
 
@@ -47,7 +48,6 @@ class TitleProvider with ChangeNotifier {
   }
 
   Future<void> searchTitle(String query) async {
-    // _searchedTitles.clear();
     final url =
         'https://api.themoviedb.org/3/search/multi?query=$query&language=pt-BR';
     await API()
